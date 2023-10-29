@@ -756,6 +756,7 @@ class HttpStream(layer.Layer):
             )
             yield SendHttp(ResponseEndOfMessage(self.stream_id), self.context.client)
         else:
+            self.client_state = self.state_done
             yield from self.send_response()
 
     @expect(RequestData, RequestEndOfMessage, events.Event)
